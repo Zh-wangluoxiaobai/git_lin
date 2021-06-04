@@ -1,0 +1,98 @@
+1.安装yarn    
+npm / cnpm i yarn 
+2.查看版本
+yarn --version
+yarn安装包儿
+yarn add 包名
+3.安装create-react-app  全局安装
+4.在目录下使用 
+create-react-app app生成脚手架
+
+
+import React from "react"
+import Home from "../view/Home"
+import Discover from "../view/Discover"
+import Order from "../view/Order"
+import My from "../view/My"
+import {
+    //路由组件
+    BrowserRouter as Router,
+    //路由入口组件儿
+    NavLink,
+    //路由容器组件儿
+    Route
+} from "react-router-dom"
+class MyRouter extends React.Component{
+    render(){
+        return (<div>
+            <Router>
+            <div>
+                <Route path="/" exact={true} component={Home}></Route>
+                <Route path="/discover" component={Discover}></Route>
+                <Route path="/order" component={Order}></Route>
+                <Route path="/my" component={My}></Route>
+            </div>
+            <div>
+                <NavLink to="/" exact={true}>首页</NavLink>
+                <NavLink to="/discover">发现</NavLink>
+                <NavLink to="/order">订单</NavLink>
+                <NavLink to="/my">我的</NavLink>
+            </div>
+            </Router>
+        </div>)
+    }
+}
+
+export default MyRouter
+
+
+路由传值
+import React from "react"
+import View1 from "../view/View1"
+import View2 from "../view/View2"
+import View3 from "../view/View3"
+import View4 from "../view/View4"
+import {
+    //路由组件
+    BrowserRouter as Router,
+    //路由入口组件儿
+    NavLink,
+    //路由容器组件儿
+    Route
+} from "react-router-dom"
+import My from "../view/My"
+import MyRouter from "./Router"
+class MyRouter1 extends React.Component{
+    render(){
+        return (<div>
+            <Router>
+                <div>
+                    <Route path="/" exact={true} component={View1}></Route>
+                    <Route path="/v2/:id" component={View2}></Route>
+                    <Route path="/v3" component={View3}></Route>
+                    <Route path="/v4" component={View4}></Route>
+                </div>
+                <div>
+                    <NavLink to="/" exact={true}>1</NavLink>
+                    {
+                        // path传值
+                        // 1.传输量小   刷新页面数据不丢失
+                    }
+                    <NavLink to="/v2/123">2</NavLink>
+                    {
+                        // query传值
+                        // 1.传输量大   书信页面数据丢失
+                    }
+                    <NavLink to={{pathname:"/v3",query:{name:"shao",age:"18"}}}>3</NavLink>
+                    {
+                        // state传值
+                        // 1.传输量大   刷新页面不丢失
+                    }
+                    <NavLink to={{pathname:"/v4",state:{name:"lin",age:"28"}}}>4</NavLink>
+                </div>
+            </Router>
+        </div>)
+    }
+}
+export default MyRouter1
+
